@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-stone: #F6F4EF;
+    --bg-travertine: #ECE8DF;
+    --bg-plaster: #FAF9F6;
+    --ink-primary: #1C1A17;
+    --ink-secondary: #5B554D;
+    --ink-muted: #847C71;
+    --accent-bronze: #8C6D4F;
+    --accent-bronze-dark: #6D523A;
+    --hairline: #DDD6CA;
+    --dark-ground: #1A1815;
+    --dark-hairline: #312D28;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-stone);
+    color: var(--ink-primary);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  html[dir='rtl'] {
+    font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  body {
+    overflow-x: hidden;
+    background-color: var(--bg-stone);
+    color: var(--ink-primary);
+    margin: 0;
+  }
+}
+
+/* Editorial typography classes */
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+html[dir='rtl'] .font-display {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-weight: 500;
+  letter-spacing: 0 !important;
+  line-height: 1.28;
+}
+
+html[dir='rtl'] h1.font-display {
+  line-height: 1.22;
+}
+
+html[dir='rtl'] h2.font-display,
+html[dir='rtl'] h3.font-display {
+  line-height: 1.3;
+}
+
+/* Preserve connected cursive Arabic typography across all tracked buttons and labels */
+html[dir='rtl'] * {
+  letter-spacing: 0 !important;
+}
+
+/* Optical sizing alignment for compact Arabic UI CTAs */
+html[dir='rtl'] button,
+html[dir='rtl'] a {
+  text-transform: none;
+}
+
+.font-sans-ui {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+html[dir='rtl'] .font-sans-ui {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.eyebrow {
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+html[dir='rtl'] .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* Restrained architectural animations */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: pageFadeIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes heroSubtleZoom {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-image-motion {
+  animation: heroSubtleZoom 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Editorial scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Precision editorial image zoom hover */
+.image-frame {
+  overflow: hidden;
+  background-color: #E6E1D7;
+}
+
+.image-frame img {
+  transition: transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.group:hover .image-frame img,
+.image-frame:hover img {
+  transform: scale(1.035);
+}
+
+/* Architectural underline link */
+.link-editorial {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.32rem;
+}
+
+.link-editorial::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.38;
+  transform-origin: left center;
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[dir='rtl'] .link-editorial::after {
+  transform-origin: right center;
+}
+
+.link-editorial:hover::after {
+  opacity: 1;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .page-enter,
+  .hero-image-motion,
+  .image-frame img {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Minimal custom inputs */
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* Quiet editorial horizontal hairline scrollbar on light mode */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-stone);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C7BEB0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8C6D4F;
+}
